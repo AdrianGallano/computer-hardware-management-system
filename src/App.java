@@ -47,6 +47,12 @@ public class App {
         case "10":
           viewAllEmployee();
           break;
+        case "13":
+          deletePheriperal();
+          break;
+        case "14":
+          deleteEmployee();
+          break;
         default:
           System.out.println("ENTER A VALID OPTION!");
           continue;
@@ -154,14 +160,15 @@ public class App {
   }
 
   static void viewAllPheriperals(){
-    String[] column = {"Name", "Code", "Type", "Empolyee Assigned"};
+    String[] column = {"Name", "Code", "Type", "Employee Assigned"};
     System.out.print("   ");
     for(int i = 0; i < column.length; i++){
       System.out.print(column[i] + " ".repeat(20 - column[i].length()));
       System.out.print("|");
     }
     System.out.println("");
-    for(int i = 0; i < numberOfPheriperal; i++){
+    for(int i = 0; i < PcComponents.length; i++){
+      
       System.out.print(i+1 + ". ");
       for(int j = 0; j < PcComponents[i].length; j++){
         if(PcComponents[i][j] != null){
@@ -242,5 +249,33 @@ public class App {
         System.out.println((i+1) + ". " + PcComponents[i][0]);
       }
     }
+  }
+
+  static void deletePheriperal(){
+    viewAvailablePheriperal();
+    System.out.println("Choose pheriperal to delete: ");
+    int pheriperalToDelete = in.nextInt();
+    
+    PcComponents[pheriperalToDelete - 1][0] = null;
+    PcComponents[pheriperalToDelete - 1][1] = null;
+    PcComponents[pheriperalToDelete - 1][2] = null;
+    PcComponents[pheriperalToDelete - 1][3] = null;
+    numberOfPheriperal--;
+  }
+  
+  static void deleteEmployee(){
+    viewAllEmployee();
+    System.out.println("Choose employee to delete: ");
+    int employeeToDelete = in.nextInt();
+    
+    for(int i = 0; i < employees.length; i++){
+      if(PcComponents[i][3] == null) continue;
+      if(PcComponents[i][3].compareTo(employees[employeeToDelete - 1]) == 0){
+        PcComponents[i][3] = null;
+      }
+    }
+    employees[employeeToDelete - 1] = null;
+    numberOfEmployee--;
+
   }
 }
