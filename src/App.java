@@ -32,6 +32,18 @@ public class App {
         case "5":
           viewAvailablePheriperal();
           break;
+        case "6":
+          viewNotAvailablePheriperal();
+          break;
+        case "7":
+          viewInputPheriperal();
+          break;
+        case "8":
+          viewOutputPheriperal();
+          break;
+        case "9":
+          viewInputAndOutputPheriperal();
+          break;
         case "10":
           viewAllEmployee();
           break;
@@ -40,14 +52,6 @@ public class App {
           continue;
       }
 
-    }
-
-    for (int i = 0; i < numberOfPheriperal; i++) {
-      System.out.println(PcComponents[i][0]);
-    }
-
-    for (int i = 0; i < numberOfEmployee; i++) {
-      System.out.println(employees[i]);
     }
 
     in.close();
@@ -150,7 +154,7 @@ public class App {
   }
 
   static void viewAllPheriperals(){
-    String[] column = {"Name", "Code", "Type", "Emolyee Assigned"};
+    String[] column = {"Name", "Code", "Type", "Empolyee Assigned"};
     System.out.print("   ");
     for(int i = 0; i < column.length; i++){
       System.out.print(column[i] + " ".repeat(20 - column[i].length()));
@@ -201,4 +205,42 @@ public class App {
     }
   }
 
+  static void viewNotAvailablePheriperal(){
+    System.out.println("------------Not Available Pheriperals----------------");
+    for(int i = 0 ; i < PcComponents.length; i++){
+      if(PcComponents[i][3] != null){
+        System.out.println((i+1) + ". " + PcComponents[i][0]);
+      }
+    }
+  }
+
+  static void viewInputPheriperal(){
+    System.out.println("------------Input Pheriperals----------------");
+    for(int i = 0 ; i < PcComponents.length; i++){
+      if(PcComponents[i][2] == null) continue;
+      if(PcComponents[i][2].compareTo("Input") == 0){
+        System.out.println((i+1) + ". " + PcComponents[i][0]);
+      }
+    }
+  }
+
+  static void viewOutputPheriperal(){
+    System.out.println("------------------Output Pheriperals----------------");
+    for(int i = 0 ; i < PcComponents.length; i++){
+      if(PcComponents[i][2] == null) continue;
+      if(PcComponents[i][2].compareTo("Output") == 0){
+        System.out.println((i+1) + ". " + PcComponents[i][0]);
+      }
+    }
+  }
+
+  static void viewInputAndOutputPheriperal(){
+    System.out.println("-------------Input and Output Pheriperals----------------");
+    for(int i = 0 ; i < PcComponents.length; i++){
+      if(PcComponents[i][2] == null) continue;
+      if(PcComponents[i][2].compareTo("Input and Output") == 0){
+        System.out.println((i+1) + ". " + PcComponents[i][0]);
+      }
+    }
+  }
 }
