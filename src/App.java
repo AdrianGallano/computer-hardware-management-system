@@ -7,6 +7,7 @@ public class App {
   static int pheriperalCode = (Year.now().getValue() * 10000) + 1;
   static int numberOfPheriperal = 0;
   static int numberOfEmployee = 0;
+  static int generalNumberCounter = 0;
   private static Scanner in = new Scanner(System.in);
 
   public static void main(String[] args) {
@@ -47,11 +48,32 @@ public class App {
         case "10":
           viewAllEmployee();
           break;
+        case "11":
+          editPheriperal();
+          break;
+        case "12":
+          editEmployee();
+          break;
         case "13":
           deletePheriperal();
           break;
         case "14":
           deleteEmployee();
+          break;
+        case "15":
+          numberOfAvailablePheriperal();
+          break;
+        case "16":
+          numberOfAssignedPheriperal();
+          break;
+        case "17":
+          numberOfInputPheriperal();
+          break;
+        case "18":
+          numberOfOutputPheriperal();
+          break;
+        case "19":
+          numberOfEmployeesWithPheriperal();
           break;
         default:
           System.out.println("ENTER A VALID OPTION!");
@@ -108,13 +130,13 @@ public class App {
   }
 
   static void addPheriperal() {
-    String[] PheriperalTypeOptions = {"Input", "Output", "Input and Output"};
+    String[] PheriperalTypeOptions = { "Input", "Output", "Input and Output" };
     System.out.println("Enter Pheriperal Name: ");
     String newPheriperal = in.nextLine();
-    
+
     System.out.println("-----------------------------------------------------");
-    for(int i = 0; i < PheriperalTypeOptions.length; i++){
-      System.out.println((i+1) + ". "  + PheriperalTypeOptions[i]);
+    for (int i = 0; i < PheriperalTypeOptions.length; i++) {
+      System.out.println((i + 1) + ". " + PheriperalTypeOptions[i]);
     }
     System.out.print("Enter Pheriperal Type: ");
     int PheriperalType = in.nextInt();
@@ -159,22 +181,22 @@ public class App {
     return false;
   }
 
-  static void viewAllPheriperals(){
-    String[] column = {"Name", "Code", "Type", "Employee Assigned"};
+  static void viewAllPheriperals() {
+    String[] column = { "Name", "Code", "Type", "Employee Assigned" };
     System.out.print("   ");
-    for(int i = 0; i < column.length; i++){
+    for (int i = 0; i < column.length; i++) {
       System.out.print(column[i] + " ".repeat(20 - column[i].length()));
       System.out.print("|");
     }
     System.out.println("");
-    for(int i = 0; i < PcComponents.length; i++){
-      
-      System.out.print(i+1 + ". ");
-      for(int j = 0; j < PcComponents[i].length; j++){
-        if(PcComponents[i][j] != null){
+    for (int i = 0; i < PcComponents.length; i++) {
+
+      System.out.print(i + 1 + ". ");
+      for (int j = 0; j < PcComponents[i].length; j++) {
+        if (PcComponents[i][j] != null) {
           System.out.print(PcComponents[i][j] + " ".repeat(20 - PcComponents[i][j].length()));
           System.out.print("|");
-        }else{
+        } else {
           System.out.print(PcComponents[i][j] + " ".repeat(16));
           System.out.print("|");
         }
@@ -184,7 +206,7 @@ public class App {
   }
 
   static void assignPheriperalToEmployee() {
-    
+
     viewAvailablePheriperal();
     System.out.println("Select Pheriperal:");
     int pheriperalToBeAssigned = in.nextInt();
@@ -193,89 +215,191 @@ public class App {
     int employeeToAssign = in.nextInt();
 
     System.out.println(employees[employeeToAssign - 1]);
-    PcComponents[pheriperalToBeAssigned - 1][3] = employees[employeeToAssign - 1]; 
+    PcComponents[pheriperalToBeAssigned - 1][3] = employees[employeeToAssign - 1];
   }
 
   static void viewAllEmployee() {
     System.out.println("---------------------Employees-----------------------");
-    for(int i = 0; i < employees.length; i++){
-      System.out.println((i+1) + ". " + employees[i]);
+    for (int i = 0; i < employees.length; i++) {
+      System.out.println((i + 1) + ". " + employees[i]);
     }
   }
 
-  static void viewAvailablePheriperal(){
+  static void viewAvailablePheriperal() {
     System.out.println("----------------Available Pheriperals----------------");
-    for(int i = 0 ; i < PcComponents.length; i++){
-      if(PcComponents[i][3] == null){
-        System.out.println((i+1) + ". " + PcComponents[i][0]);
+    for (int i = 0; i < PcComponents.length; i++) {
+      if (PcComponents[i][3] == null) {
+        System.out.println((i + 1) + ". " + PcComponents[i][0]);
       }
     }
   }
 
-  static void viewNotAvailablePheriperal(){
+  static void viewNotAvailablePheriperal() {
     System.out.println("------------Not Available Pheriperals----------------");
-    for(int i = 0 ; i < PcComponents.length; i++){
-      if(PcComponents[i][3] != null){
-        System.out.println((i+1) + ". " + PcComponents[i][0]);
+    for (int i = 0; i < PcComponents.length; i++) {
+      if (PcComponents[i][3] != null) {
+        System.out.println((i + 1) + ". " + PcComponents[i][0]);
       }
     }
   }
 
-  static void viewInputPheriperal(){
+  static void viewInputPheriperal() {
     System.out.println("------------Input Pheriperals----------------");
-    for(int i = 0 ; i < PcComponents.length; i++){
-      if(PcComponents[i][2] == null) continue;
-      if(PcComponents[i][2].compareTo("Input") == 0){
-        System.out.println((i+1) + ". " + PcComponents[i][0]);
+    for (int i = 0; i < PcComponents.length; i++) {
+      if (PcComponents[i][2] == null)
+        continue;
+      if (PcComponents[i][2].compareTo("Input") == 0) {
+        System.out.println((i + 1) + ". " + PcComponents[i][0]);
       }
     }
   }
 
-  static void viewOutputPheriperal(){
+  static void viewOutputPheriperal() {
     System.out.println("------------------Output Pheriperals----------------");
-    for(int i = 0 ; i < PcComponents.length; i++){
-      if(PcComponents[i][2] == null) continue;
-      if(PcComponents[i][2].compareTo("Output") == 0){
-        System.out.println((i+1) + ". " + PcComponents[i][0]);
+    for (int i = 0; i < PcComponents.length; i++) {
+      if (PcComponents[i][2] == null)
+        continue;
+      if (PcComponents[i][2].compareTo("Output") == 0) {
+        System.out.println((i + 1) + ". " + PcComponents[i][0]);
       }
     }
   }
 
-  static void viewInputAndOutputPheriperal(){
+  static void viewInputAndOutputPheriperal() {
     System.out.println("-------------Input and Output Pheriperals----------------");
-    for(int i = 0 ; i < PcComponents.length; i++){
-      if(PcComponents[i][2] == null) continue;
-      if(PcComponents[i][2].compareTo("Input and Output") == 0){
-        System.out.println((i+1) + ". " + PcComponents[i][0]);
+    for (int i = 0; i < PcComponents.length; i++) {
+      if (PcComponents[i][2] == null)
+        continue;
+      if (PcComponents[i][2].compareTo("Input and Output") == 0) {
+        System.out.println((i + 1) + ". " + PcComponents[i][0]);
       }
     }
   }
 
-  static void deletePheriperal(){
-    viewAvailablePheriperal();
-    System.out.println("Choose pheriperal to delete: ");
+  static void deletePheriperal() {
+    viewAllPheriperals();
+    System.out.print("Choose pheriperal to delete: ");
     int pheriperalToDelete = in.nextInt();
-    
+
     PcComponents[pheriperalToDelete - 1][0] = null;
     PcComponents[pheriperalToDelete - 1][1] = null;
     PcComponents[pheriperalToDelete - 1][2] = null;
     PcComponents[pheriperalToDelete - 1][3] = null;
     numberOfPheriperal--;
   }
-  
-  static void deleteEmployee(){
+
+  static void deleteEmployee() {
     viewAllEmployee();
-    System.out.println("Choose employee to delete: ");
+    System.out.print("Choose employee to delete: ");
     int employeeToDelete = in.nextInt();
-    
-    for(int i = 0; i < employees.length; i++){
-      if(PcComponents[i][3] == null) continue;
-      if(PcComponents[i][3].compareTo(employees[employeeToDelete - 1]) == 0){
+
+    for (int i = 0; i < employees.length; i++) {
+      if (PcComponents[i][3] == null)
+        continue;
+      if (PcComponents[i][3].compareTo(employees[employeeToDelete - 1]) == 0) {
         PcComponents[i][3] = null;
       }
     }
     employees[employeeToDelete - 1] = null;
     numberOfEmployee--;
+  }
 
+  static void numberOfAvailablePheriperal() {
+    generalNumberCounter = 0;
+    System.out.print("Number Of Available Pheriperals: ");
+    for (int i = 0; i < PcComponents.length; i++) {
+      if (PcComponents[i][0] != null & PcComponents[i][3] == null) {
+        generalNumberCounter++;
+      }
+    }
+    System.out.println(generalNumberCounter);
+  }
+
+  static void numberOfAssignedPheriperal() {
+    generalNumberCounter = 0;
+    System.out.print("Number Of Assigned Pheriperals: ");
+    for (int i = 0; i < PcComponents.length; i++) {
+      if (PcComponents[i][0] != null & PcComponents[i][3] != null) {
+        generalNumberCounter++;
+      }
+    }
+    System.out.println(generalNumberCounter);
+  }
+
+  static void numberOfInputPheriperal() {
+    generalNumberCounter = 0;
+    System.out.print("Number Of Input Devices: ");
+    for (int i = 0; i < PcComponents.length; i++) {
+      if(PcComponents[i][2] == null) continue;
+      if (PcComponents[i][0] != null & PcComponents[i][2].compareTo("Input") == 0) {
+        generalNumberCounter++;
+      }
+    }
+    System.out.println(generalNumberCounter);
+  }
+
+  static void numberOfOutputPheriperal() {
+    generalNumberCounter = 0;
+    System.out.print("Number Of Input Devices: ");
+    for (int i = 0; i < PcComponents.length; i++) {
+      if(PcComponents[i][2] == null) continue;
+      if (PcComponents[i][0] != null & PcComponents[i][2].compareTo("Output") == 0) {
+        generalNumberCounter++;
+      }
+    }
+    System.out.println(generalNumberCounter);
+  }
+
+  static void numberOfEmployeesWithPheriperal() {
+    generalNumberCounter = 0;
+    System.out.print("Number Of Employees with Pheriperal: ");
+    employeeLoop: for (int i = 0; i < employees.length; i++) {
+      for (int j = 0; j < PcComponents.length; j++) {
+        if(employees[i] == null || PcComponents[j][3] == null) continue;
+        if (employees[i].compareTo(PcComponents[j][3]) == 0) {
+          generalNumberCounter++;
+          continue employeeLoop;
+        }
+      }
+    }
+    System.out.println(generalNumberCounter);
+  }
+
+  static void editPheriperal(){
+    String[] PheriperalTypeOptions = { "Input", "Output", "Input and Output" };
+
+    viewAllPheriperals();
+    System.out.println("Choose Pheriperal To Edit: ");
+    int pheriperalToEdit = in.nextInt();
+
+    System.out.print("Edit Pheriperal Name: ");
+    String pheriperalNameEdited = in.next();
+
+    for (int i = 0; i < PheriperalTypeOptions.length; i++) {
+      System.out.println((i + 1) + ". " + PheriperalTypeOptions[i]);
+    }
+    System.out.println("Edit Pheriperal Type: ");
+    int pheriperalTypeEdited = in.nextInt();
+    
+    viewAllEmployee();
+    System.out.println("Edit Pheriperal Employee: ");
+    int pheriperalEmployeeEdited = in.nextInt();
+
+    PcComponents[pheriperalToEdit - 1][0] = pheriperalNameEdited;
+    PcComponents[pheriperalToEdit - 1][2] = PheriperalTypeOptions[pheriperalTypeEdited - 1];
+    PcComponents[pheriperalToEdit - 1][3] = employees[pheriperalEmployeeEdited - 1];
+
+  }
+
+  static void editEmployee(){
+    viewAllEmployee();
+    System.out.println("Enter Employee To Edit: ");
+    int employeeToEdit = in.nextInt();
+    in.nextLine();
+    
+    System.out.println("Edit Name: ");
+    String employeeNameEdited = in.nextLine();
+
+    employees[employeeToEdit - 1] = employeeNameEdited;
   }
 }
