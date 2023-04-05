@@ -9,9 +9,10 @@ public class App {
   static int numberOfEmployee = 0;
   static int generalNumberCounter = 0;
   private static Scanner in = new Scanner(System.in);
+  static String password = null;
 
   public static void main(String[] args) {
-
+    setPassword();
     main: while (true) {
       String option = selectOption();
 
@@ -83,6 +84,22 @@ public class App {
     }
 
     in.close();
+  }
+
+  static void setPassword() {
+    while (password == null) {
+      System.out.println("Enter your password: ");
+      String enterPassword = in.nextLine();
+
+      System.out.println("Confirm your password: ");
+      String confirmPassword = in.nextLine();
+
+      if (enterPassword.compareTo(confirmPassword) == 0) {
+        password = enterPassword;
+      } else {
+        System.out.println("Password does not match, please try again.");
+      }
+    }
   }
 
   static String selectOption() {
@@ -281,11 +298,15 @@ public class App {
     System.out.print("Choose pheriperal to delete: ");
     int pheriperalToDelete = in.nextInt();
 
-    PcComponents[pheriperalToDelete - 1][0] = null;
-    PcComponents[pheriperalToDelete - 1][1] = null;
-    PcComponents[pheriperalToDelete - 1][2] = null;
-    PcComponents[pheriperalToDelete - 1][3] = null;
-    numberOfPheriperal--;
+    if (PcComponents[pheriperalToDelete - 1][3] == null) {
+      PcComponents[pheriperalToDelete - 1][0] = null;
+      PcComponents[pheriperalToDelete - 1][1] = null;
+      PcComponents[pheriperalToDelete - 1][2] = null;
+      numberOfPheriperal--;
+
+    } else {
+      System.out.println("Deletion failed, please unassign employee");
+    }
   }
 
   static void deleteEmployee() {
@@ -330,7 +351,8 @@ public class App {
     generalNumberCounter = 0;
     System.out.print("Number Of Input Devices: ");
     for (int i = 0; i < PcComponents.length; i++) {
-      if(PcComponents[i][2] == null) continue;
+      if (PcComponents[i][2] == null)
+        continue;
       if (PcComponents[i][0] != null & PcComponents[i][2].compareTo("Input") == 0) {
         generalNumberCounter++;
       }
@@ -342,7 +364,8 @@ public class App {
     generalNumberCounter = 0;
     System.out.print("Number Of Input Devices: ");
     for (int i = 0; i < PcComponents.length; i++) {
-      if(PcComponents[i][2] == null) continue;
+      if (PcComponents[i][2] == null)
+        continue;
       if (PcComponents[i][0] != null & PcComponents[i][2].compareTo("Output") == 0) {
         generalNumberCounter++;
       }
@@ -355,7 +378,8 @@ public class App {
     System.out.print("Number Of Employees with Pheriperal: ");
     employeeLoop: for (int i = 0; i < employees.length; i++) {
       for (int j = 0; j < PcComponents.length; j++) {
-        if(employees[i] == null || PcComponents[j][3] == null) continue;
+        if (employees[i] == null || PcComponents[j][3] == null)
+          continue;
         if (employees[i].compareTo(PcComponents[j][3]) == 0) {
           generalNumberCounter++;
           continue employeeLoop;
@@ -365,7 +389,7 @@ public class App {
     System.out.println(generalNumberCounter);
   }
 
-  static void editPheriperal(){
+  static void editPheriperal() {
     String[] PheriperalTypeOptions = { "Input", "Output", "Input and Output" };
 
     viewAllPheriperals();
@@ -380,7 +404,7 @@ public class App {
     }
     System.out.println("Edit Pheriperal Type: ");
     int pheriperalTypeEdited = in.nextInt();
-    
+
     viewAllEmployee();
     System.out.println("Edit Pheriperal Employee: ");
     int pheriperalEmployeeEdited = in.nextInt();
@@ -391,12 +415,12 @@ public class App {
 
   }
 
-  static void editEmployee(){
+  static void editEmployee() {
     viewAllEmployee();
     System.out.println("Enter Employee To Edit: ");
     int employeeToEdit = in.nextInt();
     in.nextLine();
-    
+
     System.out.println("Edit Name: ");
     String employeeNameEdited = in.nextLine();
 
