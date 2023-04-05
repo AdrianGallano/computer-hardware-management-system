@@ -392,38 +392,51 @@ public class App {
   static void editPheriperal() {
     String[] PheriperalTypeOptions = { "Input", "Output", "Input and Output" };
 
-    viewAllPheriperals();
-    System.out.println("Choose Pheriperal To Edit: ");
-    int pheriperalToEdit = in.nextInt();
+    System.out.println("Password is required for modification: ");
+    String promptPassword = in.nextLine();
 
-    System.out.print("Edit Pheriperal Name: ");
-    String pheriperalNameEdited = in.next();
+    if (password.compareTo(promptPassword) == 0) {
+      viewAllPheriperals();
+      System.out.println("Choose Pheriperal To Edit: ");
+      int pheriperalToEdit = in.nextInt();
 
-    for (int i = 0; i < PheriperalTypeOptions.length; i++) {
-      System.out.println((i + 1) + ". " + PheriperalTypeOptions[i]);
+      System.out.print("Edit Pheriperal Name: ");
+      String pheriperalNameEdited = in.next();
+
+      for (int i = 0; i < PheriperalTypeOptions.length; i++) {
+        System.out.println((i + 1) + ". " + PheriperalTypeOptions[i]);
+      }
+      System.out.println("Edit Pheriperal Type: ");
+      int pheriperalTypeEdited = in.nextInt();
+
+      viewAllEmployee();
+      System.out.println("Edit Pheriperal Employee: ");
+      int pheriperalEmployeeEdited = in.nextInt();
+
+      PcComponents[pheriperalToEdit - 1][0] = pheriperalNameEdited;
+      PcComponents[pheriperalToEdit - 1][2] = PheriperalTypeOptions[pheriperalTypeEdited - 1];
+      PcComponents[pheriperalToEdit - 1][3] = employees[pheriperalEmployeeEdited - 1];
+    } else {
+      System.out.println("Incorrect password, modification failed");
     }
-    System.out.println("Edit Pheriperal Type: ");
-    int pheriperalTypeEdited = in.nextInt();
-
-    viewAllEmployee();
-    System.out.println("Edit Pheriperal Employee: ");
-    int pheriperalEmployeeEdited = in.nextInt();
-
-    PcComponents[pheriperalToEdit - 1][0] = pheriperalNameEdited;
-    PcComponents[pheriperalToEdit - 1][2] = PheriperalTypeOptions[pheriperalTypeEdited - 1];
-    PcComponents[pheriperalToEdit - 1][3] = employees[pheriperalEmployeeEdited - 1];
-
   }
 
   static void editEmployee() {
-    viewAllEmployee();
-    System.out.println("Enter Employee To Edit: ");
-    int employeeToEdit = in.nextInt();
-    in.nextLine();
+    System.out.println("Password is required for modification: ");
+    String promptPassword = in.nextLine();
 
-    System.out.println("Edit Name: ");
-    String employeeNameEdited = in.nextLine();
+    if (password.compareTo(promptPassword) == 0) {
+      viewAllEmployee();
+      System.out.println("Enter Employee To Edit: ");
+      int employeeToEdit = in.nextInt();
+      in.nextLine();
 
-    employees[employeeToEdit - 1] = employeeNameEdited;
+      System.out.println("Edit Name: ");
+      String employeeNameEdited = in.nextLine();
+
+      employees[employeeToEdit - 1] = employeeNameEdited;
+    } else {
+      System.out.println("Incorrect password, modification failed");
+    }
   }
 }
