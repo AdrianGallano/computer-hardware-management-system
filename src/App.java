@@ -88,10 +88,10 @@ public class App {
 
   static void setPassword() {
     while (password == null) {
-      System.out.println("Enter your password: ");
+      System.out.print("Enter your password: ");
       String enterPassword = in.nextLine();
 
-      System.out.println("Confirm your password: ");
+      System.out.print("Confirm your password: ");
       String confirmPassword = in.nextLine();
 
       if (enterPassword.compareTo(confirmPassword) == 0) {
@@ -141,14 +141,14 @@ public class App {
         -----------------------------------------------------
         """);
 
-    System.out.println("Enter your option: ");
+    System.out.print("Enter your option: ");
     String decision = in.nextLine();
     return decision;
   }
 
   static void addPheriperal() {
     String[] PheriperalTypeOptions = { "Input", "Output", "Input and Output" };
-    System.out.println("Enter Pheriperal Name: ");
+    System.out.print("Enter Pheriperal Name: ");
     String newPheriperal = in.nextLine();
 
     System.out.println("-----------------------------------------------------");
@@ -174,7 +174,7 @@ public class App {
   }
 
   static void addEmployee() {
-    System.out.println("Enter Employee Name: ");
+    System.out.print("Enter Employee Name: ");
     String newEmployee = in.nextLine();
 
     if (!(isArrayStateFull(employees.length, numberOfEmployee))) {
@@ -225,13 +225,12 @@ public class App {
   static void assignPheriperalToEmployee() {
 
     viewAvailablePheriperal();
-    System.out.println("Select Pheriperal:");
+    System.out.print("Select Pheriperal:");
     int pheriperalToBeAssigned = in.nextInt();
     viewAllEmployee();
     System.out.println("Select Employee:");
     int employeeToAssign = in.nextInt();
-
-    System.out.println(employees[employeeToAssign - 1]);
+    in.nextLine();
     PcComponents[pheriperalToBeAssigned - 1][3] = employees[employeeToAssign - 1];
   }
 
@@ -297,7 +296,7 @@ public class App {
     viewAllPheriperals();
     System.out.print("Choose pheriperal to delete: ");
     int pheriperalToDelete = in.nextInt();
-
+    in.nextLine();
     if (PcComponents[pheriperalToDelete - 1][3] == null) {
       PcComponents[pheriperalToDelete - 1][0] = null;
       PcComponents[pheriperalToDelete - 1][1] = null;
@@ -313,7 +312,7 @@ public class App {
     viewAllEmployee();
     System.out.print("Choose employee to delete: ");
     int employeeToDelete = in.nextInt();
-
+    in.nextLine();
     for (int i = 0; i < employees.length; i++) {
       if (PcComponents[i][3] == null)
         continue;
@@ -399,7 +398,7 @@ public class App {
       viewAllPheriperals();
       System.out.println("Choose Pheriperal To Edit: ");
       int pheriperalToEdit = in.nextInt();
-
+      in.nextLine();
       System.out.print("Edit Pheriperal Name: ");
       String pheriperalNameEdited = in.next();
 
@@ -408,11 +407,11 @@ public class App {
       }
       System.out.println("Edit Pheriperal Type: ");
       int pheriperalTypeEdited = in.nextInt();
-
+      in.nextLine();
       viewAllEmployee();
       System.out.println("Edit Pheriperal Employee: ");
       int pheriperalEmployeeEdited = in.nextInt();
-
+      in.nextLine();
       PcComponents[pheriperalToEdit - 1][0] = pheriperalNameEdited;
       PcComponents[pheriperalToEdit - 1][2] = PheriperalTypeOptions[pheriperalTypeEdited - 1];
       PcComponents[pheriperalToEdit - 1][3] = employees[pheriperalEmployeeEdited - 1];
